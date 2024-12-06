@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trial_ptojects/screens/course_screen.dart';
 
 // ignore: must_be_immutable
 class HomePage extends StatelessWidget {
@@ -180,7 +181,14 @@ class HomePage extends StatelessWidget {
                   ),
                   itemBuilder: (context, index) {
                     return InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                CourseScreen(imgList[index]),
+                          ));
+                      },
                       child: Container(
                         padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                         decoration: BoxDecoration(
@@ -197,7 +205,7 @@ class HomePage extends StatelessWidget {
                                 height: 100,
                               ),
                             ),
-                            SizedBox(height: 10),
+                            SizedBox(height: 6),
                             Text(
                               imgList[index],
                               style: TextStyle(
@@ -226,6 +234,19 @@ class HomePage extends StatelessWidget {
           ),     
         ],
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        showSelectedLabels: true,
+        iconSize: 32,
+        selectedItemColor: Color(0xFF1518C1),
+        selectedFontSize: 18,
+        unselectedItemColor: Colors.grey,
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+          BottomNavigationBarItem(icon: Icon(Icons.assignment), label: "Courses"),
+          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: "Wishlist"),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Account"),
+
+        ],)
     );
   }
 }
