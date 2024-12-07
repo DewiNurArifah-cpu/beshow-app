@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:trial_ptojects/widgets/description_section.dart';
+import 'package:trial_ptojects/widgets/videos_section.dart';
 
+// ignore: must_be_immutable
 class CourseScreen extends StatefulWidget {
   String img;
   CourseScreen(this.img);
@@ -8,6 +11,8 @@ class CourseScreen extends StatefulWidget {
 }
 
 class _CourseScreenState extends State<CourseScreen> {
+
+  bool isVideosSection = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +56,7 @@ class _CourseScreenState extends State<CourseScreen> {
               ),
               child: Center(
                 child: Container(
-                  padding: EdgeInsets.all(10),
+                  padding: EdgeInsets.all(5),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     shape: BoxShape.circle,
@@ -59,11 +64,104 @@ class _CourseScreenState extends State<CourseScreen> {
                   child: Icon(
                     Icons.play_arrow_rounded,
                     color: Color(0xFF1518C1),
-                    size: 35,
+                    size: 45,
                   ),
                 ),
               ),
             ),
+            SizedBox(height: 15),
+            Text(
+              "${widget.img} Complete Course",
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            SizedBox(height: 5),
+            Text(
+              "Created by Dear Programmer",
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                color: Colors.black.withOpacity(0.7),
+              ),
+            ),
+            SizedBox(height: 5),
+            Text(
+              "55 Videos",
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w500,
+                color: Colors.black.withOpacity(0.5),
+              ),
+            ),
+            SizedBox(height: 20),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              decoration: BoxDecoration(
+                color: Color(0xFFF5F3FF),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Material(
+                    // if isVideosSection condition is true then thar colors will be on button and if false then thar colors will be shown button but with some opacity.
+                    color: isVideosSection ? Color(0xFF1518C1) : Color(0xFF1518C1).withOpacity(0.6),
+                    borderRadius: BorderRadius.circular(10),
+                    child: InkWell(
+                      onTap: () {
+                        // change value of isVideosSection
+                        setState(() {
+                          isVideosSection = true;
+                        });
+                      },
+                      child: Container(
+                        padding: 
+                           EdgeInsets.symmetric(horizontal: 35, vertical: 15),
+                        child: Text(
+                          "Videos",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Material(
+                    color: isVideosSection ? Color(0xFF1518C1).withOpacity(0.6) : Color(0xFF1518C1),
+                    borderRadius: BorderRadius.circular(10),
+                    child: InkWell(
+                      onTap: () {
+                        // change value of isVideosSection
+                        setState(() {
+                          isVideosSection = false;
+                        });
+                      },
+                      child: Container(
+                        padding: 
+                           EdgeInsets.symmetric(horizontal: 35, vertical: 15),
+                        child: Text(
+                          "Descriptions",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            // we will create 2 different sections for the videos and the descriptions section
+            SizedBox(height: 10),
+            // if isVideosSection condition is true then VideoSection() will be shown and if false it means DescriptionSection() will be shown
+            isVideosSection ? VideoSection() : DescriptionSection(),
           ],
         ),
       ),
